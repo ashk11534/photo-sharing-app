@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-gxh9zolq2w)b(kq00i$e6r_&$owqcl^$s&*n557_x6g=noh_r1"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['glacial-coast-02082.herokuapp.com']
+ALLOWED_HOSTS = ['glacial-coast-02082.herokuapp.com/photo-share/home']
 
 
 # Application definition

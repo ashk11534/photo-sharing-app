@@ -131,6 +131,7 @@ def register_user(request):
     }
     return render(request, 'base/form-register.html', context)
 
+@login_required(login_url='login_user')
 def user_profile(request, pk):
     profile = Profile.objects.get(id=pk)
     posts = profile.post_set.all().order_by('-created')
@@ -150,6 +151,7 @@ def logout_user(request):
     logout(request)
     return redirect('login_user')
 
+@login_required(login_url='login_user')
 def delete_post(request):
     post_id = request.GET.get('id')
     post = Post.objects.get(id=post_id)
@@ -167,6 +169,7 @@ def delete_post(request):
     }
     return render(request, 'base/post_delete.html', context)
 
+@login_required(login_url='login_user')
 def like_post(request, post_id, user_id):
     post = Post.objects.get(id=post_id)
     profile = Profile.objects.get(id=user_id)
@@ -180,6 +183,7 @@ def like_post(request, post_id, user_id):
     post.save()
     return redirect('home', url_route='home')
 
+@login_required(login_url='login_user')
 def comment_post(request, post_id, user_id):
     post = Post.objects.get(id=post_id)
     profile = Profile.objects.get(id=user_id)
@@ -193,6 +197,7 @@ def comment_post(request, post_id, user_id):
             post.comments.add(comment)
             return redirect('home', url_route='home')
 
+@login_required(login_url='login_user')
 def following(request, user_id, following_user_id):
     user_profile = Profile.objects.get(id=user_id)
     following_user_profile = Profile.objects.get(id=following_user_id)
@@ -204,6 +209,7 @@ def following(request, user_id, following_user_id):
                 request, '<p style="color: #fff; background-color: #10ac84;">You have started following {}</p>'.format(following_user_profile.name), extra_tags='safe')
     return redirect('home', url_route='home')
 
+@login_required(login_url='login_user')
 def message(request):
     all_profiles = Profile.objects.all().order_by('-created')
     post_form = PostForm()
@@ -216,6 +222,7 @@ def message(request):
     }
     return render(request, 'base/chat.html', context)
 
+@login_required(login_url='login_user')
 def chat_box(request, receiver_id):
     receiver = Profile.objects.get(id=receiver_id)
     all_profiles = Profile.objects.all().order_by('-created')
@@ -249,12 +256,13 @@ def chat_box(request, receiver_id):
     }
     return render(request, 'base/chat.html', context)
 
-
+@login_required(login_url='login_user')
 def delete_message(request, message_id):
     message = Message.objects.get(id=message_id)
     message.delete()
     return redirect('chat_box', receiver_id=message.receiver.id)
-
+    
+@login_required(login_url='login_user')
 def mark_message_read(request, receiver_id):
     receiver = Profile.objects.get(id=receiver_id)
     number_of_friend_messages = Message.objects.filter(sender = receiver, receiver = request.user.profile, mark_as_read = False)

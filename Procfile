@@ -1,0 +1,1 @@
+web: gunicorn PhotoSharingApp.wsgi

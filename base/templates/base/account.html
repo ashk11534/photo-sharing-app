@@ -1,0 +1,56 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div id="wrapper">
+
+    {% include 'base/sidebar.html' %}
+    <div class="main_content">
+
+        <header>
+            <div class="header_inner">
+                <div class="left-side">
+                    <!-- Logo -->
+                    <div id="logo" class=" uk-hidden@s">
+                        <a href="home.html">
+                            <img src="assets/images/logo-mobile.png" alt="">
+                            <img src="assets/images/logo-mobile-light.png" class="logo_inverse">
+                        </a>
+                    </div>
+
+                    <div class="triger" uk-toggle="target: #wrapper ; cls: sidebar-active">
+                        <i class="uil-bars"></i>
+                    </div>
+
+                </div>
+                {% include 'base/navbar_right_side.html' %}
+            </div>
+        </header>
+
+        <div class="container m-auto"> 
+
+            <h1 class="text-2xl leading-none text-gray-900 tracking-tight mt-3"> Account Setting </h1>
+
+            <div class="grid lg:grid-cols-3 mt-12 gap-8">
+                <div class="bg-white rounded-md lg:shadow-lg shadow col-span-2">
+
+                   <form action="" method="POST" enctype="multipart/form-data" class="grid grid-cols-2 gap-3 lg:p-6 p-4">
+                    {% csrf_token %}
+                       {% for field in profile_form %}
+                       {{field.label}}
+                       {{field}}
+                       {% endfor %}
+                       <input type="submit" class="p-2 px-4 rounded bg-gray-50 text-red-500" value="Cancel" name="cancel">
+                       <input type="submit" class="button bg-blue-700" value="Save" name="save">
+                    </form> 
+                </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        
+    </div>
+
+</div>
+{% endblock content %}

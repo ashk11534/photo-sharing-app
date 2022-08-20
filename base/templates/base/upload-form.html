@@ -1,0 +1,25 @@
+    <!-- upload -->
+    <a href="#"
+    class="bg-pink-500 flex font-bold hover:bg-pink-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-1 rounded shado text-white">
+    <ion-icon name="add-circle" class="opacity-90 text-xl uilus-circle"></ion-icon><i class="fa-solid fa-plus"></i>
+</a>
+ <!-- upload dropdown box -->
+<div uk-dropdown="pos: top-right;mode:click ; animation: uk-animation-slide-bottom-small" class="header_dropdown">
+
+    <!-- notification contents -->
+    <div class="flex justify-center flex-center text-center dark:text-gray-300">
+
+        <div class="flex flex-col choose-upload text-center">
+
+            <p class="my-3 leading-6"> Do you have a photo wants to share us <br> please upload her ..
+            </p>
+            <form action="{% url 'home' url_route %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form}}<br>
+                <input type="submit" class="button soft-warning small" value="Upload">
+            </form>
+
+        </div>
+
+    </div>
+</div>

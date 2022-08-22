@@ -12,6 +12,7 @@ urlpatterns = [
     path('like-post/<str:post_id>/<str:user_id>/', views.like_post, name='like_post'),
     path('comment-post/<str:post_id>/<str:user_id>/', views.comment_post, name='comment_post'),
     path('following/<str:user_id>/<str:following_user_id>/', views.following, name='following'),
+    path('unfollowing/<str:user_id>/<str:unfollowing_user_id>/', views.unfollowing, name='unfollowing'),
     path('message/', views.message, name='message'),
     path('chat_box/<str:receiver_id>/', views.chat_box, name='chat_box'),
     path('delete_message/<str:message_id>/', views.delete_message, name='delete_message'),

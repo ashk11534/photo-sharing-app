@@ -210,6 +210,14 @@ def following(request, user_id, following_user_id):
     return redirect('home', url_route='home')
 
 @login_required(login_url='login_user')
+def unfollowing(request, user_id, unfollowing_user_id):
+    user_profile = Profile.objects.get(id=user_id)
+    unfollowing_user_profile = Profile.objects.get(id=unfollowing_user_id)
+    user_profile.following.remove(unfollowing_user_profile)
+    user_profile.save()
+    return redirect('user_profile', pk=unfollowing_user_id)
+
+@login_required(login_url='login_user')
 def message(request):
     all_profiles = Profile.objects.all().order_by('-created')
     post_form = PostForm()

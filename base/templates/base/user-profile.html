@@ -49,7 +49,7 @@
             <h2 class="font-semibold lg:text-2xl text-lg mb-2">{{profile.name}}</h2>
             <p class="lg:text-left mb-2 text-center  dark:text-gray-100"></p>
                 <div class="flex font-semibold mb-3 space-x-2  dark:text-gray-10">
-                    {% if profile.social_facebook %}<a href="{{profile.social_facebook}}">Facebook</a>{% endif %} , {% if profile.social_linkedin %}<a href="{{profile.social_linkedin}}">Linkedin</a>{% endif %} , {% if profile.social_twitter %}<a href="{{profile.social_twitter}}">Twitter</a>{% endif %}
+                    {% if profile.social_facebook %}<a href="{{profile.social_facebook}}">Facebook</a>{% endif %} {% if profile.social_linkedin %}<a href="{{profile.social_linkedin}}">Linkedin</a>{% endif %} {% if profile.social_twitter %}<a href="{{profile.social_twitter}}">Twitter</a>{% endif %}
                 </div>
                 <div class="flex font-semibold mb-3 space-x-2  dark:text-gray-10">
                     {% if profile.location %} {{profile.location}} {% endif %}
@@ -58,16 +58,12 @@
                 
                 <div class="capitalize flex font-semibold space-x-3 text-center text-sm my-2">
                    {% if request.user.profile != profile %}
-                   <a href="#" class="bg-gray-300 shadow-sm p-2 px-6 rounded-md dark:bg-gray-700"> Add friend</a>
-                   <a href="#" class="bg-pink-500 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-pink-600"> Send message</a>
+                   {% if profile not in request.user.profile.following.all %}
+                   <a href="{% url 'following' request.user.profile.id profile.id %}" class="bg-gray-300 shadow-sm p-2 px-6 rounded-md dark:bg-gray-700"> Follow</a>
+                   {% endif %}
+                   <a href="{% url 'unfollowing' request.user.profile.id profile.id %}" class="bg-pink-500 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-pink-600"> Unfollow</a>
                    {% endif %}
                     <div>
-                    {% if request.user.profile != profile %}
-                    <a href="#" class="bg-gray-300 flex h-12 h-full items-center justify-center rounded-full text-xl w-9 dark:bg-gray-700"> 
-                        <i class="icon-feather-chevron-down"></i> 
-                    </a>
-                    {% endif %}
-                        
                     </div>
 
                 </div>

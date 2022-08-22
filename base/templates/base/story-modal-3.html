@@ -24,7 +24,9 @@
                                     <br>
                                     {% for flwn in request.user.profile.following.all|slice:'::-1'%}
                                     <div class="flex">
-                                        <img src="{{flwn.profile_image.url}}" alt="" class="w-6 h-6 rounded-full border-2 border-white dark:border-gray-900">
+                                        <a href="{% url 'user_profile' flwn.id %}">
+                                            <img src="{{flwn.profile_image.url}}" alt="" class="w-6 h-6 rounded-full border-2 border-white dark:border-gray-900">
+                                        </a>
                                         &nbsp;<p>{{flwn.name}}</p>
                                     </div>
                                     {% endfor %}

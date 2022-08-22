@@ -61,7 +61,9 @@
                    {% if profile not in request.user.profile.following.all %}
                    <a href="{% url 'following' request.user.profile.id profile.id %}" class="bg-gray-300 shadow-sm p-2 px-6 rounded-md dark:bg-gray-700"> Follow</a>
                    {% endif %}
+                   {% if profile in request.user.profile.following.all %}
                    <a href="{% url 'unfollowing' request.user.profile.id profile.id %}" class="bg-pink-500 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-pink-600"> Unfollow</a>
+                   {% endif %}
                    {% endif %}
                     <div>
                     </div>
